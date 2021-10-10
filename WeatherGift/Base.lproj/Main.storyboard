@@ -26,7 +26,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Yfl-5m-4lh"/>
                                     <barButtonItem image="list.bullet" catalog="system" id="YQC-In-KOo">
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="presentation" id="2zT-3P-6kc"/>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="2zT-3P-6kc"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -102,11 +102,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LocationListViewController" customModule="WeatherGift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-JG-Iwf">
-                                <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="HuG-1T-EJB"/>
                                 </constraints>
@@ -125,7 +125,7 @@
                                 </items>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="r0w-DH-4Lv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Kpv-wS-cYK" detailTextLabel="d09-Zs-x71" rowHeight="59" style="IBUITableViewCellStyleSubtitle" id="6kR-CN-hFA">
@@ -170,6 +170,7 @@
                             <constraint firstItem="iqH-JG-Iwf" firstAttribute="top" secondItem="r0w-DH-4Lv" secondAttribute="bottom" id="rfI-jd-N0w"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="exS-bq-1dk"/>
                     <connections>
                         <outlet property="addLocationBarButton" destination="QQd-9e-Saw" id="0MS-Tj-OsF"/>
                         <outlet property="editBarButton" destination="jFm-R3-37O" id="IpT-Q2-DNu"/>
