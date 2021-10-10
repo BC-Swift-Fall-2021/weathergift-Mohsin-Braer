@@ -16,21 +16,29 @@ class LocationListViewController: UIViewController{
     
     
     var weatherLocations: [WeatherLocation] = [];
+    
+    var selectedLocationIndex = 0;
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var weatherLocation = WeatherLocation.init(name: "Chestnut Hill, MA", latitide: 0, longitude: 0);
-        weatherLocations.append(weatherLocation);
-        weatherLocation = WeatherLocation.init(name: "New York City, NY", latitide: 0, longitude: 0);
-        weatherLocations.append(weatherLocation);
-        weatherLocation = WeatherLocation.init(name: "San Francisco, CA", latitide: 0, longitude: 0);
-        weatherLocations.append(weatherLocation);
+//        var weatherLocation = WeatherLocation.init(name: "Chestnut Hill, MA", latitide: 0, longitude: 0);
+//        weatherLocations.append(weatherLocation);
+//        weatherLocation = WeatherLocation.init(name: "New York City, NY", latitide: 0, longitude: 0);
+//        weatherLocations.append(weatherLocation);
+//        weatherLocation = WeatherLocation.init(name: "San Francisco, CA", latitide: 0, longitude: 0);
+//        weatherLocations.append(weatherLocation);
+        
+        
         
         tableView.dataSource = self;
         tableView.delegate = self;
         
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        selectedLocationIndex = tableView.indexPathForSelectedRow!.row;
+    }
+    
     
     @IBAction func addLocationPressed(_ sender: UIBarButtonItem) {
         let autocompleteController = GMSAutocompleteViewController()
