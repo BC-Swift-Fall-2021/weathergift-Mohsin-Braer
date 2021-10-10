@@ -25,7 +25,7 @@ class LocationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if weatherLocation == nil{
-            weatherLocation = WeatherLocation(name: "Current Location", latitide: 0, longitude: 0)
+            weatherLocation = WeatherLocation(name: "Current Location", latitude: 0, longitude: 0)
             weatherLocations.append(weatherLocation);
         }
         
