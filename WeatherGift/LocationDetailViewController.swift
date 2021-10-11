@@ -17,7 +17,7 @@ class LocationDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var weatherLocation: WeatherLocation!;
+    var weatherDetail: WeatherDetail!;
     var locationIndex = 0;
     
     
@@ -52,17 +52,21 @@ class LocationDetailViewController: UIViewController {
     {
         let pageViewController = UIApplication.shared.windows.first!.rootViewController as! PageViewController
         
-        weatherLocation = pageViewController.weatherLocations[locationIndex];
+        let weatherLocation = pageViewController.weatherLocations[locationIndex];
+        weatherDetail = WeatherDetail(name: weatherLocation.name, latitude: weatherLocation.latitide, longitude: weatherLocation.longitude)
         
-        dateLabel.text = "";
-        placeLabel.text = weatherLocation.name;
-        temperatureLabel.text = "--°"
-        summaryLabel.text = "";
         
         pageControl.numberOfPages = pageViewController.weatherLocations.count;
         pageControl.currentPage = locationIndex
         
-        weatherLocation.getData();
+        weatherDetail.getData(){
+            DispatchQueue.main.async {
+                self.dateLabel.text = self.weatherDetail.timezone;
+                self.placeLabel.text = self.weatherDetail.name;
+                self.temperatureLabel.text = String(self.weatherDetail.temperature);
+                self.summaryLabel.text = self.weatherDetail.summary;
+            }
+        }
         
         
     }
