@@ -21,6 +21,13 @@ class LocationDetailViewController: UIViewController {
     var locationIndex = 0;
     
     
+    private let dateFormatter: DateFormatter = {
+        print("Created Date Formatter")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM, d"
+        return dateFormatter
+    }()
+    
     
     
     override func viewDidLoad() {
@@ -61,10 +68,14 @@ class LocationDetailViewController: UIViewController {
         
         weatherDetail.getData(){
             DispatchQueue.main.async {
-                self.dateLabel.text = self.weatherDetail.timezone;
+                self.dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
+                let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
+                self.dateLabel.text = self.dateFormatter.string(from: usableDate)
                 self.placeLabel.text = self.weatherDetail.name;
                 self.temperatureLabel.text = String(self.weatherDetail.temperature);
                 self.summaryLabel.text = self.weatherDetail.summary;
+                
+                self.imageView.image = UIImage(named: self.weatherDetail.dailyIcon)
             }
         }
         
