@@ -75,7 +75,7 @@ class LocationDetailViewController: UIViewController {
                 self.temperatureLabel.text = String(self.weatherDetail.temperature);
                 self.summaryLabel.text = self.weatherDetail.summary;
                 
-                self.imageView.image = UIImage(named: self.weatherDetail.dailyIcon)
+                self.imageView.image = UIImage(named: self.weatherDetail.dayIcon)
             }
         }
         

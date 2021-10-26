@@ -121,7 +121,7 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
     print("Place ID: \(place.placeID)")
     print("Place attributions: \(place.attributions)")
     
-      let newLocation = WeatherLocation(name: place.name ?? "unkown place", latitide: place.coordinate.latitude, longitude: place.coordinate.longitude);
+      let newLocation = WeatherLocation(name: place.name ?? "unknown place", latitude: place.coordinate.latitude, longitude: place.coordinate.longitude);
       
       weatherLocations.append(newLocation);
       tableView.reloadData();
