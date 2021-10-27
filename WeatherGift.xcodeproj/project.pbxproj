@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E17F3AE2727B36000C49840 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E17F3AD2727B36000C49840 /* DailyTableViewCell.swift */; };
 		4E62C71F2729A79B003E838B /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E62C71E2729A79B003E838B /* HourlyCollectionViewCell.swift */; };
+		4E62C7212729CF15003E838B /* UIViewController+alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E62C7202729CF15003E838B /* UIViewController+alert.swift */; };
 		4E79E523270BFD1E005278AC /* APIkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E79E522270BFD1E005278AC /* APIkeys.swift */; };
 		4E80EC192713904F007604DB /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80EC182713904F007604DB /* LocationDetailViewController.swift */; };
 		4E80EC1B27149A3E007604DB /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E80EC1A27149A3E007604DB /* PageViewController.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		4E17F3AD2727B36000C49840 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		4E62C71E2729A79B003E838B /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E62C7202729CF15003E838B /* UIViewController+alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+alert.swift"; sourceTree = "<group>"; };
 		4E79E522270BFD1E005278AC /* APIkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkeys.swift; sourceTree = "<group>"; };
 		4E80EC182713904F007604DB /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 		4E80EC1A27149A3E007604DB /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				4E815301270B67F7003B40F3 /* LocationListViewController.swift */,
 				4E17F3AD2727B36000C49840 /* DailyTableViewCell.swift */,
 				4E62C71E2729A79B003E838B /* HourlyCollectionViewCell.swift */,
+				4E62C7202729CF15003E838B /* UIViewController+alert.swift */,
 				4E815303270B67F7003B40F3 /* Main.storyboard */,
 				4E815306270B67F8003B40F3 /* Assets.xcassets */,
 				4E815308270B67F8003B40F3 /* LaunchScreen.storyboard */,
@@ -354,6 +357,7 @@
 				4E81532E270B710D003B40F3 /* WeatherLocation.swift in Sources */,
 				4E79E523270BFD1E005278AC /* APIkeys.swift in Sources */,
 				4E8152FE270B67F7003B40F3 /* AppDelegate.swift in Sources */,
+				4E62C7212729CF15003E838B /* UIViewController+alert.swift in Sources */,
 				4E80EC192713904F007604DB /* LocationDetailViewController.swift in Sources */,
 				4E815300270B67F7003B40F3 /* SceneDelegate.swift in Sources */,
 				4E62C71F2729A79B003E838B /* HourlyCollectionViewCell.swift in Sources */,

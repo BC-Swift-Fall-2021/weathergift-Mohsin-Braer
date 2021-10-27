@@ -21,5 +21,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>WeatherGift needs the device locaton to display local weather</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>WeatherGift needs the device locaton to display local weather</string>
 </dict>
 </plist>

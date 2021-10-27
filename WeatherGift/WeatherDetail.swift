@@ -84,8 +84,7 @@ class WeatherDetail: WeatherLocation {
     func getData(completed: @escaping () -> ()){
         let urlString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitide)&lon=\(longitude)&exclude=minutely&units=imperial&appid=\(APIkeys.openWeatherAPIKeys)"
         
-        print("")
-        
+
         guard let url = URL(string: urlString) else{
             print("ERROR: Could not create URL")
             completed()
@@ -103,7 +102,6 @@ class WeatherDetail: WeatherLocation {
             do{
                 let result = try JSONDecoder().decode(Result.self, from: data!)
                 let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                print("\(json)")
                 self.timezone = result.timezone
                 self.currentTime = result.current.dt
                 self.temperature = Int(result.current.temp.rounded())
@@ -119,7 +117,6 @@ class WeatherDetail: WeatherLocation {
                     let dailyMin = Int(result.daily[index].temp.min.rounded())
                     let dailyWeather = DailyWeather(dailyIcon: dailyIcon, dailyWeekday: "", dailyHigh: dailyMax, dailyLow: dailyMin, dailySummary: dailySummary)
                     self.dailyWeatherData.append(dailyWeather)
-                    print("Day: \(dailyWeekday)  High: \(dailyMax)  Low: \(dailyMin)")
 
                 }
                 //get only 24 hrs of hourly data
@@ -134,7 +131,6 @@ class WeatherDetail: WeatherLocation {
                         let hourlyTemperature = Int(result.hourly[index].temp.rounded())
                         let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: hourlyTemperature)
                         self.hourlyWeatherData.append(hourlyWeather)
-                        print("Hour: \(hour)  Temperature: \(hourlyTemperature)  Icon: \(hourlyIcon)")
                     }
                 }
             

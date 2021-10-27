@@ -117,9 +117,6 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
 
   // Handle the user's selection.
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    print("Place name: \(place.name)")
-    print("Place ID: \(place.placeID)")
-    print("Place attributions: \(place.attributions)")
     
       let newLocation = WeatherLocation(name: place.name ?? "unknown place", latitude: place.coordinate.latitude, longitude: place.coordinate.longitude);
       
@@ -131,7 +128,7 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
 
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
     // TODO: handle the error.
-    print("Error: ", error.localizedDescription)
+    print("ERROR: ", error.localizedDescription)
   }
 
   // User canceled the operation.
