@@ -69,22 +69,7 @@ class LocationDetailViewController: UIViewController {
         imageView.image = UIImage()
 
     }
-    
-//    func loadLocations()
-//    {
-//        guard let locationsEncoded = UserDefaults.standard.value(forKey: "weatherLocations")
-//                as? Data else{
-//                    print("ERROR: Could not load weatherLocations data from UserDefaults. Unless this is the first time, else ignore")
-//                    return
-//                }
-//
-//        let decoder = JSONDecoder()
-//        if let weatherLocations = try? decoder.decode(Array.self, from: locationsEncoded) as [WeatherLocation]{
-//            self.weatherLocations = weatherLocations
-//        } else{
-//            print("ERROR: Couldn't decode data read from UserDefaults.")
-//        }
-//    }
+
     
     func updateUserInterface()
     {
@@ -112,14 +97,15 @@ class LocationDetailViewController: UIViewController {
             }
         }
         
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as! LocationListViewController
-        let pageViewController = UIApplication.shared.windows.first!.rootViewController as! PageViewController
+        if segue.identifier == "ShowList" {
+            let destination = segue.destination as! LocationListViewController
+            let pageViewController = UIApplication.shared.windows.first!.rootViewController as! PageViewController
 
-        destination.weatherLocations = pageViewController.weatherLocations;
+            destination.weatherLocations = pageViewController.weatherLocations;
+        }
     }
     
     @IBAction func unwindFromLocationListViewController(segue: UIStoryboardSegue){
@@ -146,8 +132,23 @@ class LocationDetailViewController: UIViewController {
         
         pageViewController.setViewControllers([pageViewController.createLocationDetailViewController(forPage: sender.currentPage)], direction: direction, animated: true, completion: nil)
 
-        
     }
+    
+    //    func loadLocations()
+    //    {
+    //        guard let locationsEncoded = UserDefaults.standard.value(forKey: "weatherLocations")
+    //                as? Data else{
+    //                    print("ERROR: Could not load weatherLocations data from UserDefaults. Unless this is the first time, else ignore")
+    //                    return
+    //                }
+    //
+    //        let decoder = JSONDecoder()
+    //        if let weatherLocations = try? decoder.decode(Array.self, from: locationsEncoded) as [WeatherLocation]{
+    //            self.weatherLocations = weatherLocations
+    //        } else{
+    //            print("ERROR: Couldn't decode data read from UserDefaults.")
+    //        }
+    //    }
 
 }
 

@@ -110,6 +110,24 @@ extension LocationListViewController: UITableViewDataSource, UITableViewDelegate
         
     }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0
+        { return false}
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0
+        {return false}
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return (proposedDestinationIndexPath.row == 0 ? sourceIndexPath : proposedDestinationIndexPath)
+    }
+    
     
 }
 
@@ -135,7 +153,7 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {
     dismiss(animated: true, completion: nil)
   }
-
+    
 //  // Turn the network activity indicator on and off again.
 //  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
 //    UIApplication.shared.isNetworkActivityIndicatorVisible = true
