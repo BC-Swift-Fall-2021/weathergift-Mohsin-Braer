@@ -24,6 +24,7 @@ struct DailyWeather {
     var dailyWeekday: String
     var dailyHigh: Int
     var dailyLow: Int
+    var dailySummary: String
 
 }
 
@@ -51,6 +52,7 @@ class WeatherDetail: WeatherLocation {
      private struct Weather: Codable{
         var description: String
         var icon: String
+         var id: Int
     }
     
     private struct Daily: Codable{
@@ -115,7 +117,7 @@ class WeatherDetail: WeatherLocation {
                     let dailySummary = result.daily[index].weather[0].description
                     let dailyMax = Int(result.daily[index].temp.max.rounded())
                     let dailyMin = Int(result.daily[index].temp.min.rounded())
-                    let dailyWeather = DailyWeather(dailyIcon: dailyIcon, dailyWeekday: "", dailyHigh: dailyMax, dailyLow: dailyMin)
+                    let dailyWeather = DailyWeather(dailyIcon: dailyIcon, dailyWeekday: "", dailyHigh: dailyMax, dailyLow: dailyMin, dailySummary: dailySummary)
                     self.dailyWeatherData.append(dailyWeather)
                     print("Day: \(dailyWeekday)  High: \(dailyMax)  Low: \(dailyMin)")
 
@@ -127,7 +129,8 @@ class WeatherDetail: WeatherLocation {
                         let hourlyDate = Date(timeIntervalSince1970: result.hourly[index].dt)
                         hourFormatter.timeZone = TimeZone(identifier: result.timezone)
                         let hour = hourFormatter.string(from: hourlyDate)
-                        let hourlyIcon = self.fileNameForIcon(icon: result.hourly[index].weather[0].icon)
+                        //let hourlyIcon = self.fileNameForIcon(icon: result.hourly[index].weather[0].icon)
+                        let hourlyIcon = self.systemNameFromID(id: result.hourly[index].weather[0].id, icon: result.hourly[index].weather[0].icon)
                         let hourlyTemperature = Int(result.hourly[index].temp.rounded())
                         let hourlyWeather = HourlyWeather(hour: hour, hourlyIcon: hourlyIcon, hourlyTemperature: hourlyTemperature)
                         self.hourlyWeatherData.append(hourlyWeather)
@@ -171,6 +174,43 @@ class WeatherDetail: WeatherLocation {
         }
         
         return newFileName
+    }
+    
+    private func systemNameFromID(id: Int, icon: String) -> String{
+        switch id{
+        case 200...299:
+            return "cloud.bolt.rain"
+        case 300...399:
+            return "cloud.drizzle"
+        case 500, 501, 521, 531:
+            return "cloud.rain"
+        case 502, 503, 504, 522:
+            return "cloud.heavyrain"
+        case 511, 611...616:
+            return "sleet"
+        case 600...602, 620...622:
+            return "snow"
+        case 701, 711, 741:
+            return "cloud.fog"
+        case 721:
+            return (icon.hasSuffix("d") ? "sun.haze" : "cloud.fog")
+        case 731, 751, 761, 762:
+            return (icon.hasSuffix("d") ? "sun.dust" : "cloud.fog")
+        case 771:
+            return "wind"
+        case 781:
+            return "tornado"
+        case 800:
+            return (icon.hasSuffix("d") ? "sun.max" : "moon")
+        case 801, 802:
+            return (icon.hasSuffix("d") ? "cloud.sun" : "cloud.moon")
+        case 803, 804:
+            return "cloud"
+
+        default:
+            return "questionmark.diamond"
+        }
+        
     }
     
 }

@@ -7,8 +7,16 @@
 
 import UIKit
 
-class LocationDetailViewController: UIViewController {
+private let dateFormatter: DateFormatter = {
+    print("Created Date Formatter")
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE, MMM, d"
+    return dateFormatter
+}()
 
+class LocationDetailViewController: UIViewController {
+    
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -16,27 +24,38 @@ class LocationDetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var weatherDetail: WeatherDetail!;
     var locationIndex = 0;
     
     
-    private let dateFormatter: DateFormatter = {
-        print("Created Date Formatter")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMM, d"
-        return dateFormatter
-    }()
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         updateUserInterface();
         
 
         // Do any additional setup after loading the view.
+    }
+    
+    func clearUserInterface()
+    {
+        dateLabel.text = ""
+        placeLabel.text = ""
+        temperatureLabel.text = ""
+        summaryLabel.text = ""
+        
+        imageView.image = UIImage()
+
     }
     
 //    func loadLocations()
@@ -68,14 +87,16 @@ class LocationDetailViewController: UIViewController {
         
         weatherDetail.getData(){
             DispatchQueue.main.async {
-                self.dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
+                dateFormatter.timeZone = TimeZone(identifier: self.weatherDetail.timezone)
                 let usableDate = Date(timeIntervalSince1970: self.weatherDetail.currentTime)
-                self.dateLabel.text = self.dateFormatter.string(from: usableDate)
+                self.dateLabel.text = dateFormatter.string(from: usableDate)
                 self.placeLabel.text = self.weatherDetail.name;
                 self.temperatureLabel.text = String(self.weatherDetail.temperature);
                 self.summaryLabel.text = self.weatherDetail.summary;
                 
                 self.imageView.image = UIImage(named: self.weatherDetail.dayIcon)
+                self.tableView.reloadData()
+                self.collectionView.reloadData()
             }
         }
         
@@ -115,7 +136,42 @@ class LocationDetailViewController: UIViewController {
 
         
     }
-    
-
 
 }
+
+extension LocationDetailViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return weatherDetail.dailyWeatherData.count
+
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DailyTableViewCell
+        cell.dailyWeather = weatherDetail.dailyWeatherData[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+   
+    
+    
+    
+}
+
+extension LocationDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return weatherDetail.hourlyWeatherData.count
+    }
+    
+    
+func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let hourlyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyCell", for: indexPath) as! HourlyCollectionViewCell
+    hourlyCell.hourlyWeather = weatherDetail.hourlyWeatherData[indexPath.row]
+    return hourlyCell
+}
+    
+}
+
